@@ -23,3 +23,6 @@ pen-evaluate = "pen_pose.evaluation.evaluate:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.uv]
+python-preference = "only-managed"

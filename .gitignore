@@ -46,15 +46,6 @@ Thumbs.db
 /data/**/*
 !/data/**/
 !/data/**/.gitkeep
-!/data/annotation/*.csv
-!/data/dataset/data.yaml
-!/data/dataset/train.txt
-!/data/dataset/val.txt
-!/data/dataset/annotations_pixels.json
-!/data/dataset/frames.csv
-!/data/dataset/README.md
-!/data/dataset/labels/*.txt
-!/data/dataset/labels/data.yaml
 /log/*
 !/log/.gitkeep
 
