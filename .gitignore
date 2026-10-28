@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+.python/
+.uv-cache/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+
+# Test and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local environment and logs
+.env
+.env.*
+!.env.example
+!.env.template
+*.log
+/temp/*
+!/temp/.gitkeep
+
+# Local datasets, checkpoints, and generated logs
+/data/**/*
+!/data/**/
+!/data/**/.gitkeep
+!/data/annotation/*.csv
+!/data/dataset/data.yaml
+!/data/dataset/train.txt
+!/data/dataset/val.txt
+!/data/dataset/annotations_pixels.json
+!/data/dataset/frames.csv
+!/data/dataset/README.md
+!/data/dataset/labels/*.txt
+!/data/dataset/labels/data.yaml
+/log/*
+!/log/.gitkeep
+
+# Default output location used by standalone Ultralytics commands
+/runs/
+
+# Model weights and exports, including accidental root downloads
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.engine
+
+# Dataset media are covered by /data/; documentation images remain trackable.
+# Keep uv.lock and .python-version in version control.
