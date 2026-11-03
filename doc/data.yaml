@@ -1,0 +1,15 @@
+# Object classes
+names:
+  0: pen
+
+# Two keypoints, each represented by (x, y, visibility).
+kpt_shape: [2, 3]
+
+# Horizontal flipping preserves tip/tail identities.
+flip_idx: [0, 1]
+
+# Must match keypoint order in every label row.
+kpt_names:
+  0:
+    - tip
+    - tail
