@@ -11,6 +11,8 @@ from pen_pose.path import DATASET_DIR, MODEL_DIR, PROJECT_ROOT, RUN_DIR, TEMP_DI
 
 os.environ.setdefault('YOLO_AUTOINSTALL', 'false')
 os.environ.setdefault('YOLO_CONFIG_DIR', str(TEMP_DIR/'ultralytics'))
+# Ultralytics falls back to CWD when the config parent does not exist.
+Path(os.environ['YOLO_CONFIG_DIR']).expanduser().mkdir(parents=True, exist_ok=True)
 
 import numpy as np
 from ultralytics import YOLO
