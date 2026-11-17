@@ -8,12 +8,10 @@ export UV_CACHE_DIR
 export UV_PYTHON_INSTALL_DIR := $(CURDIR)/.python
 export UV_PROJECT_ENVIRONMENT := $(CURDIR)/.venv
 
-.PHONY: run app install check prepare export review train evaluate
+.PHONY: run install check prepare export review train evaluate
 
 run:
 	$(UV) run --no-sync pen-view --dataset "$(DATASET)"
-
-app: run
 
 install:
 	$(UV) sync --python 3.12 --all-extras
