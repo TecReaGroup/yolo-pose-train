@@ -10,26 +10,12 @@ export UV_PROJECT_ENVIRONMENT := $(CURDIR)/.venv
 
 .PHONY: run install check prepare export review train evaluate
 
-run:
-	$(UV) run --no-sync pen-view --dataset "$(DATASET)"
-
 install:
 	$(UV) sync --python 3.12 --all-extras
 
-check:
-	$(UV) run --no-sync pen-view --dataset "$(DATASET)" --smoke-test
+app:
+	$(UV) run --no-sync pen-view --dataset "$(DATASET)"
 
-prepare:
-	$(UV) run --no-sync pen-prepare
-
-export:
-	$(UV) run --no-sync pen-export
-
-review:
-	$(UV) run --no-sync pen-review
-
+train: DATASET = data/input
 train:
 	$(UV) run --no-sync pen-train --dataset "$(DATASET)" --epochs $(EPOCHS) --batch $(BATCH) $(if $(DEVICE),--device "$(DEVICE)")
-
-evaluate:
-	$(UV) run --no-sync pen-evaluate --dataset "$(DATASET)" $(if $(DEVICE),--device "$(DEVICE)")

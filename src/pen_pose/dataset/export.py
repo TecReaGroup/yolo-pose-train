@@ -50,6 +50,13 @@ def main() -> None:
         assert x1 <= tx <= x2 and y1 <= ty <= y2 and x1 <= ex <= x2 and y1 <= ey <= y2
         (OUT / 'labels' / f'{f.stem}.txt').write_text(' '.join(str(int(v)) if i in [0,7,10] else f'{v:.6f}' for i,v in enumerate(values))+'\n')
         im = cv2.imread(str(f))
+        height, width = im.shape[:2]
+        # Manual coordinates refer to the original 1920x1080 frames.
+        scale = np.array([width / 1920, height / 1080])
+        r['tip'] = (np.array(r['tip']) * scale).tolist()
+        r['tail'] = (np.array(r['tail']) * scale).tolist()
+        r['bbox'] = (np.array(r['bbox']) * np.tile(scale, 2)).tolist()
+        x1,y1,x2,y2 = r['bbox']
         cv2.rectangle(im, (round(x1),round(y1)), (round(x2),round(y2)), (0,220,0), 3)
         for point, name, color, vis in [(r['tip'],'tip',(0,0,255),tv),(r['tail'],'tail',(255,100,0),ev)]:
             p = tuple(round(v) for v in point)
@@ -59,8 +66,8 @@ def main() -> None:
         # Object-centered review crop includes enough context to check the box.
         cx,cy = (x1+x2)/2,(y1+y2)/2
         size = max(x2-x1,y2-y1)+110
-        left = max(0,min(1920-int(size),int(cx-size/2)))
-        top = max(0,min(1080-int(size),int(cy-size/2)))
+        left = max(0,min(width-int(size),int(cx-size/2)))
+        top = max(0,min(height-int(size),int(cy-size/2)))
         tile = cv2.resize(im[top:top+int(size),left:left+int(size)],(300,300))
         cv2.putText(tile,f.stem,(8,23),cv2.FONT_HERSHEY_SIMPLEX,.6,(0,0,255),2)
         tiles.append(tile)

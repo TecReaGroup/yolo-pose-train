@@ -22,7 +22,10 @@ def main() -> None:
     for start in range(0, len(images), 20):
         tiles = []
         for image_path in images[start:start+20]:
-            image = cv2.imread(str(image_path))[180:850, 650:1550]
+            image = cv2.imread(str(image_path))
+            height, width = image.shape[:2]
+            image = image[round(180 * height / 1080):round(850 * height / 1080),
+                          round(650 * width / 1920):round(1550 * width / 1920)]
             image = cv2.resize(image, (450, 335))
             cv2.putText(image, image_path.stem, (8, 24), cv2.FONT_HERSHEY_SIMPLEX, .7, (0,0,255), 2)
             tiles.append(image)

@@ -7,6 +7,7 @@ from pen_pose.path import DATASET_DIR, TEMP_DIR, VIDEO_DIR
 from pen_pose.logging import configure_logging
 
 OUT = DATASET_DIR
+FRAME_SIZE = (1280, 720)
 LOGGER = logging.getLogger(__name__)
 
 def main() -> None:
@@ -26,6 +27,7 @@ def main() -> None:
             if not ok:
                 raise RuntimeError((video, frame_idx))
             name = f'v{vi+1}_{i:03d}'
+            frame = cv2.resize(frame, FRAME_SIZE, interpolation=cv2.INTER_AREA)
             cv2.imwrite(str(OUT / 'images' / f'{name}.jpg'), frame)
             if i in [0, 20, 40, 60, 80, 99]:
                 thumb = cv2.resize(frame, (480, 270))
@@ -35,7 +37,7 @@ def main() -> None:
     sheet = np.vstack([np.hstack(previews[i:i+3]) for i in range(0, len(previews), 3)])
     TEMP_DIR.mkdir(parents=True, exist_ok=True)
     cv2.imwrite(str(TEMP_DIR / 'contact_sheet.jpg'), sheet)
-    LOGGER.info('Dataset frames saved to %s', OUT)
+    LOGGER.info('Dataset frames saved to %s: resolution=%sx%s', OUT, *FRAME_SIZE)
 
 if __name__ == '__main__':
     main()
